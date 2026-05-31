@@ -1,0 +1,12 @@
+#служебные папки Terraform
+.terraform/
+my_plugins/
+
+#файлы состояния (state) — там секреты!
+*.tfstate
+*.tfstate.*
+
+#файл с вашими переменными (где токены и ключи)
+terraform.tfvars
+
+*.exe
