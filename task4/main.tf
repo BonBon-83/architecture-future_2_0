@@ -124,11 +124,11 @@ resource "yandex_mdb_postgresql_cluster" "db_cluster" {
   network_id  = yandex_vpc_network.main.id
 
   config {
-    version = 15
+    version = var.pg_version
     resources {
-      resource_preset_id = "s2.medium" # 4 vCPU, 16 GB RAM
-      disk_type_id       = "network-ssd"
-      disk_size          = 100 #100 ГБ SSD под транзакции клиники и финтеха
+      resource_preset_id = var.pg_resource_preset
+      disk_type_id       = var.pg_disk_type
+      disk_size          = var.pg_disk_size
     }
   }
 
@@ -171,7 +171,7 @@ resource "yandex_compute_instance" "app_server" {
     initialize_params {
       image_id = data.yandex_compute_image.ubuntu.id
       size     = 30
-      type     = "network-ssd"
+      type     = var.vm_disk_type
     }
   }
 
